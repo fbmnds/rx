@@ -29,6 +29,15 @@
          `(ps:chain (ps:[] ,@a) (map #',f)))
         (t (error "type error in PS-MAP"))))
 
+(ps:defpsmacro ps-reduce (a f)
+  (cond ((symbolp a)
+         (let ((x (eval a)))
+           `(ps:chain (ps:[] ,@x) (reduce #',f))))
+        ((listp a)
+         `(ps:chain (ps:[] ,@a) (reduce #',f)))
+        (t (error "type error in PS-REDUCE"))))
 
+(ps:defpsmacro string+ (&rest ar)
+  `(ps-reduce ,ar #'(lambda (x y) (+ x y))))
 
 

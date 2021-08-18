@@ -44,7 +44,11 @@
     return ReactDOM.render(React.createElement(Alert, { variant : v }, 'Alert'), document.getElementById(v));
 }).bind(this));"))
 
-
+(assert (equal 
+         (ps:ps (string+ "Alert" " " "red" " " "blue"))
+         "['Alert', ' ', 'red', ' ', 'blue'].reduce(function (x, y) {
+    return x + y;
+});"))
 
 
 

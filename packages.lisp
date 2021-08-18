@@ -5,7 +5,9 @@
                     (#:ps #:parenscript)
                     (#:p6 #:paren6))
   (:export #:tlambda
-           #:fs-func#:dom-element
+           #:js-func
+           #:string+
+           #:dom-element
            #:react-element
            #:react-dom-render))
 
@@ -19,4 +21,6 @@
            #:react-element
            #:react-dom-render)
 |#  
-)
+  )
+
+
