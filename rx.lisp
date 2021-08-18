@@ -21,6 +21,9 @@
 (ps:defpsmacro doc-element (id)
   `(ps:chain document (get-element-by-id ,id)))
 
+(ps:defpsmacro react-bootstrap-tab* (tab* props &body body)
+  `(react-element (ps:chain -react-bootstrap ,tab*) ,props ,@body))
+
 (ps:defpsmacro ps-map (a f)
   (cond ((symbolp a)
          (let ((x (eval a)))

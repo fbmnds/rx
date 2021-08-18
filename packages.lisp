@@ -6,21 +6,20 @@
                     (#:p6 #:paren6))
   (:export #:tlambda
            #:js-func
+           #:ps-map
+           #:ps-reduce
            #:string+
-           #:dom-element
+           #:doc-element
            #:react-element
-           #:react-dom-render))
+           #:react-dom-render
+           #:react-bootstrap-tab*))
 
 (defpackage #:rx/tests
   (:use #:cl)
-  (:local-nicknames (#:rx #:rx)
-                    (#:ps #:parenscript)
-                    (#:p6 #:paren6))
-#|
-  (:export #:dom-element
-           #:react-element
-           #:react-dom-render)
-|#  
-  )
+  (:local-nicknames (#:ps #:parenscript)
+                    (#:p6 #:paren6)
+                    (#:rx #:rx))
+
+  (:export #:run-tests))
 
 
