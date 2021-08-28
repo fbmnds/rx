@@ -1,5 +1,18 @@
 
+(in-package #:parenscript)
+
+(named-readtables:in-readtable :parenscript)
+
+(define-expression-operator lisp-raw (lisp-form)
+  `(ps-js:escape
+    ,lisp-form))
+
+(defun lisp-raw (x) x)
+
 (in-package #:rx)
+
+(ps:defpsmacro js (s)
+  `(ps::lisp-raw ,s))
 
 (ps:defpsmacro tlambda (args &body b)
   `(ps:chain
@@ -10,7 +23,6 @@
   (let ((code (ps:ps* `(progn ,@body))))
     `(defun ,name ()
        ,code)))
-
 
 (ps:defpsmacro react-element (&body body)
   `(ps:chain -react (create-element ,@body)))
