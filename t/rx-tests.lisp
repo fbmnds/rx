@@ -62,19 +62,21 @@
            (ps:ps* `(rx:js "const [test,setTest] = useTest(0)"))
            "const [test,setTest] = useTest(0);"))
 
-
-  
   (assert (equal
            (progn
              (ps:defpsmacro -example ()
                `(lambda ()
-                  (rx:js "const [test,setTest] = useTest(0)")
+                  (rx:js "const [test,setTest] = useState(0)")
                   ,(ps:ps-html (:div "{test}"))))
              (ps:ps (-example))) 
 "function () {
-    const [test,setTest] = useTest(0);
+    const [test,setTest] = useState(0);
     return '<div>{test}</div>';
-};")))
+};"))
+
+  (assert (equal
+           (ps:ps (rx:use-state "test" 0))
+           "const [test,setTest] = useState(0);")))
 
 
 

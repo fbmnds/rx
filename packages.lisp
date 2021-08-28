@@ -10,10 +10,12 @@
            #:ps-map
            #:ps-reduce
            #:string+
+           #:upper-case-0
            #:doc-element
            #:react-element
            #:react-dom-render
-           #:react-bootstrap-tab*))
+           #:react-bootstrap-tab*
+           #:use-state))
 
 (defpackage #:rx/tests
   (:use #:cl)

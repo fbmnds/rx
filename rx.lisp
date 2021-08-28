@@ -55,4 +55,18 @@
 (ps:defpsmacro string+ (&rest ar)
   `(ps-reduce ,ar #'(lambda (x y) (+ x y))))
 
+(defun upper-case-0 (s)
+  (let ((c (code-char (+ (char-code (aref s 0))
+                         (- (char-code #\A)
+                            (char-code #\a)))))
+        (-s (copy-seq s)))
+    (setf (aref -s 0) c)
+    -s))
+
+(ps:defpsmacro use-state (state default)
+  (let* ((-state (upper-case-0 state))
+         (const (ps:lisp
+                 (format nil "const [~a,set~a] = useState(~a)" state -state default))))
+    `(rx:js ,const)))
+
 
