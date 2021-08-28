@@ -64,9 +64,10 @@
     -s))
 
 (ps:defpsmacro use-state (state default)
-  (let* ((-state (upper-case-0 state))
-         (const (ps:lisp
-                 (format nil "const [~a,set~a] = useState(~a)" state -state default))))
+  (let* ((const (format nil "const [~a,set~a] = useState" state (upper-case-0 state)))
+         (const (cond ((numberp default) (format nil "~a(~a)" const default))
+                      ((stringp default) (format nil "~a('~a')" const default))
+                      (t (error "use-state argument error")))))
     `(rx:js ,const)))
 
 
