@@ -55,18 +55,16 @@
 (ps:defpsmacro string+ (&rest ar)
   `(ps-reduce ,ar #'(lambda (x y) (+ x y))))
 
-(defun upper-case-0 (s)
-  (let ((c (code-char (+ (char-code (aref s 0))
-                         (- (char-code #\A)
-                            (char-code #\a)))))
-        (-s (copy-seq s)))
-    (setf (aref -s 0) c)
-    -s))
-
 (ps:defpsmacro use-state (state default)
-  (let* ((const (format nil "const [~a,set~a] = useState" state (upper-case-0 state)))
+  (let* ((const (format nil
+                        "const [~a,set~a] = React.useState"
+                        state (string-capitalize state)))
          (const (cond ((numberp default) (format nil "~a(~a)" const default))
                       ((stringp default) (format nil "~a('~a')" const default))
+                      ((and (listp default) (eq (car default) 'quote))
+                       (format nil "~a(~a)" const (string-downcase
+                                                   (symbol-name
+                                                    (cadr default)))))
                       (t (error "use-state argument error")))))
     `(rx:js ,const)))
 

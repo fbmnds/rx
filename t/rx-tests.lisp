@@ -76,11 +76,15 @@
 
   (assert (equal
            (ps:ps (rx:use-state "test" 0))
-           "const [test,setTest] = useState(0);"))
+           "const [test,setTest] = React.useState(0);"))
 
   (assert (equal
            (ps:ps (rx:use-state "test" "0"))
-           "const [test,setTest] = useState('0');")))
+           "const [test,setTest] = React.useState('0');"))
+
+  (assert (equal
+           (ps:ps (rx::use-state "test" 'false))
+           "const [test,setTest] = React.useState(false);")))
 
 
 
