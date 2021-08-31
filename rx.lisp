@@ -27,6 +27,9 @@
 (ps:defpsmacro react-element (&body body)
   `(ps:chain -react (create-element ,@body)))
 
+(ps:defpsmacro react-component (&body body)
+  `(p6:defclass6 ,@body))
+
 (ps:defpsmacro react-dom-render (&body body)
   `(ps:chain -react-d-o-m (render ,@body)))
 
@@ -67,5 +70,11 @@
                                                     (cadr default)))))
                       (t (error "use-state argument error")))))
     `(rx:js ,const)))
+
+(ps:defpsmacro get-prop (o p)
+  `(ps:try (ps:getprop ,o ,p) (:catch (error) ps:undefined)))
+
+(ps:defpsmacro with-prop (o p fn)
+  `(ps:try (funcall ,fn (ps:getprop ,o ,p)) (:catch (error) ps:undefined)))
 
 

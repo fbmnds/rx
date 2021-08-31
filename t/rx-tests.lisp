@@ -83,9 +83,52 @@
            "const [test,setTest] = React.useState('0');"))
 
   (assert (equal
-           (ps:ps (rx::use-state "test" 'false))
-           "const [test,setTest] = React.useState(false);")))
+           (ps:ps (rx:use-state "test" 'false))
+           "const [test,setTest] = React.useState(false);"))
 
+  (assert (equal
+           (ps:ps (rx:get-prop o 'p))
+"try {
+    o.p;
+} catch (error) {
+    undefined;
+};"))
 
+  (assert (equal
+           (ps:ps
+             (ps:var o (ps:create id 0))
+             (rx:with-prop o 'id #'(lambda (x) (+ x 1))))
+"var o = { id : 0 };
+try {
+    (function (x) {
+        return x + 1;
+    })(o.id);
+} catch (error) {
+    undefined;
+};"))
+
+  (assert (equal
+           (ps:ps (rx:with-prop (ps:create :id 0) 'id #'(lambda (x) (+ x 1))))
+"try {
+    (function (x) {
+        return x + 1;
+    })({ 'id' : 0 }.id);
+} catch (error) {
+    undefined;
+};"))
+
+  (assert (equal
+           (ps:ps (ps:let ((o (ps:create id 0)))
+                    (rx:with-prop o 'id (lambda (x) (+ x 1)))))
+"(function () {
+    var o = { id : 0 };
+    try {
+        return (function (x) {
+            return x + 1;
+        })(o.id);
+    } catch (error) {
+        return undefined;
+    };
+})();")))
 
 

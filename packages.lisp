@@ -13,9 +13,12 @@
            #:upper-case-0
            #:doc-element
            #:react-element
+           #:react-component
            #:react-dom-render
            #:react-bootstrap-tab*
-           #:use-state))
+           #:use-state
+           #:get-prop
+           #:with-prop))
 
 (defpackage #:rx/tests
   (:use #:cl)
