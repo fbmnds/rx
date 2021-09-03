@@ -77,4 +77,5 @@
 (ps:defpsmacro with-prop (o p fn)
   `(ps:try (funcall ,fn (ps:getprop ,o ,p)) (:catch (error) ps:undefined)))
 
+(ps:defpsmacro {} (&rest args) `(ps:create ,@args))
 

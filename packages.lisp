@@ -18,7 +18,8 @@
            #:react-bootstrap-tab*
            #:use-state
            #:get-prop
-           #:with-prop))
+           #:with-prop
+           #:{}))
 
 (defpackage #:rx/tests
   (:use #:cl)
