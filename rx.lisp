@@ -11,10 +11,13 @@
 
 (in-package #:rx)
 
-(ps:defpsmacro js (s)
+(defmacro defm (name args &body body)
+  `(ps:defpsmacro ,name ,args ,@body))
+
+(defm js (s)
   `(ps::lisp-raw ,s))
 
-(ps:defpsmacro tlambda (args &body b)
+(defm tlambda (args &body b)
   `(ps:chain
     (lambda ,args ,@b)
     (bind this)))
@@ -24,22 +27,22 @@
     `(defun ,name ()
        ,code)))
 
-(ps:defpsmacro react-element (&body body)
+(defm react-element (&body body)
   `(ps:chain -react (create-element ,@body)))
 
-(ps:defpsmacro react-component (&body body)
+(defm react-component (&body body)
   `(p6:defclass6 ,@body))
 
-(ps:defpsmacro react-dom-render (&body body)
+(defm react-dom-render (&body body)
   `(ps:chain -react-d-o-m (render ,@body)))
 
-(ps:defpsmacro doc-element (id)
+(defm doc-element (id)
   `(ps:chain document (get-element-by-id ,id)))
 
-(ps:defpsmacro react-bootstrap-tab* (tab* props &body body)
+(defm react-bootstrap-tab* (tab* props &body body)
   `(react-element (ps:chain -react-bootstrap ,tab*) ,props ,@body))
 
-(ps:defpsmacro ps-map (a f)
+(defm ps-map (a f)
   (cond ((symbolp a)
          (let ((x (eval a)))
            `(ps:chain (ps:[] ,@x) (map #',f))))
@@ -47,7 +50,7 @@
          `(ps:chain (ps:[] ,@a) (map #',f)))
         (t (error "type error in PS-MAP"))))
 
-(ps:defpsmacro ps-reduce (a f)
+(defm ps-reduce (a f)
   (cond ((symbolp a)
          (let ((x (eval a)))
            `(ps:chain (ps:[] ,@x) (reduce #',f))))
@@ -55,10 +58,10 @@
          `(ps:chain (ps:[] ,@a) (reduce #',f)))
         (t (error "type error in PS-REDUCE"))))
 
-(ps:defpsmacro string+ (&rest ar)
+(defm string+ (&rest ar)
   `(ps-reduce ,ar #'(lambda (x y) (+ x y))))
 
-(ps:defpsmacro use-state (state default)
+(defm use-state (state default)
   (let* ((const (format nil
                         "const [~a,set~a] = React.useState"
                         state (string-capitalize state)))
@@ -71,11 +74,11 @@
                       (t (error "use-state argument error")))))
     `(rx:js ,const)))
 
-(ps:defpsmacro get-prop (o p)
+(defm get-prop (o p)
   `(ps:try (ps:getprop ,o ,p) (:catch (error) ps:undefined)))
 
-(ps:defpsmacro with-prop (o p fn)
+(defm with-prop (o p fn)
   `(ps:try (funcall ,fn (ps:getprop ,o ,p)) (:catch (error) ps:undefined)))
 
-(ps:defpsmacro {} (&rest args) `(ps:create ,@args))
+(defm {} (&rest args) `(ps:create ,@args))
 

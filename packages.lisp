@@ -4,7 +4,8 @@
   (:local-nicknames (#:ql #:quicklisp)
                     (#:ps #:parenscript)
                     (#:p6 #:paren6))
-  (:export #:js
+  (:export #:defm
+           #:js
            #:tlambda
            #:js-func
            #:ps-map
