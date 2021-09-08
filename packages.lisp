@@ -20,6 +20,7 @@
            #:use-state
            #:get-prop
            #:with-prop
+           #:@
            #:{}))
 
 (defpackage #:rx/tests

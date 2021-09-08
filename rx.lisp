@@ -62,7 +62,8 @@
   `(ps-reduce ,ar #'(lambda (x y) (+ x y))))
 
 (defm use-state (state default)
-  (let* ((const (format nil
+  (let* ((state (string-trim #(#\;) (if (stringp state) state (ps:ps state))))
+         (const (format nil
                         "const [~a,set~a] = React.useState"
                         state (string-capitalize state)))
          (const (cond ((numberp default) (format nil "~a(~a)" const default))
@@ -75,10 +76,13 @@
     `(rx:js ,const)))
 
 (defm get-prop (o p)
-  `(ps:try (ps:getprop ,o ,p) (:catch (error) ps:undefined)))
+  `(ps:try (ps:getprop ,o ,p) (:catch (error) nil)))
+
+(defm @ (&rest args)
+  `(ps:try (ps:@ ,@args) (:catch (error) nil)))
 
 (defm with-prop (o p fn)
-  `(ps:try (funcall ,fn (ps:getprop ,o ,p)) (:catch (error) ps:undefined)))
+  `(ps:try (funcall ,fn (ps:getprop ,o ,p)) (:catch (error) nil)))
 
 (defm {} (&rest args) `(ps:create ,@args))
 
