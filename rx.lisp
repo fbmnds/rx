@@ -62,8 +62,7 @@
   `(ps-reduce ,ar #'(lambda (x y) (+ x y))))
 
 (defm use-state (state default)
-  (let* ((state (string-trim #(#\;) (if (stringp state) state (ps:ps state))))
-         (const (format nil
+  (let* ((const (format nil
                         "const [~a,set~a] = React.useState"
                         state (string-capitalize state)))
          (const (cond ((numberp default) (format nil "~a(~a)" const default))
