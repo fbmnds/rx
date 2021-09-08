@@ -91,7 +91,7 @@
 "try {
     o.p;
 } catch (error) {
-    undefined;
+    null;
 };"))
 
   (assert (equal
@@ -104,7 +104,7 @@ try {
         return x + 1;
     })(o.id);
 } catch (error) {
-    undefined;
+    null;
 };"))
 
   (assert (equal
@@ -114,7 +114,7 @@ try {
         return x + 1;
     })({ 'id' : 0 }.id);
 } catch (error) {
-    undefined;
+    null;
 };"))
 
   (assert (equal
@@ -127,7 +127,7 @@ try {
             return x + 1;
         })(o.id);
     } catch (error) {
-        return undefined;
+        return null;
     };
 })();")))
 
