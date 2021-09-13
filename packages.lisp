@@ -3,7 +3,8 @@
   (:use #:cl)
   (:local-nicknames (#:ql #:quicklisp)
                     (#:ps #:parenscript)
-                    (#:p6 #:paren6))
+                    (#:p6 #:paren6)
+                    (#:a #:alexandria))
   (:export #:defm
            #:js
            #:tlambda
@@ -17,9 +18,11 @@
            #:react-component
            #:react-dom-render
            #:react-bootstrap-tab*
+           #:toggle-switch-fn
            #:use-state
            #:get-prop
            #:with-prop
+           #:route
            #:@
            #:{}))
 

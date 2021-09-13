@@ -9,10 +9,14 @@
   (#:asdf
    #:quicklisp
    #:parenscript
-   #:paren6)
+   #:paren6
+   #:alexandria)
   :components
   ((:file "packages")
-   (:file "rx")
+   (:module "src"
+    :components
+    ((:file "rx")
+     (:file "toggle-switch")))
    (:module "t"
     :components
     ((:file "rx-tests")))))
