@@ -85,3 +85,12 @@
 
 (defm {} (&rest args) `(ps:create ,@args))
 
+(defun route (env-path path rc hdr body &optional ends-with)
+  (when (if ends-with
+            (a:ends-with-subseq path env-path)
+            (a:starts-with-subseq path env-path))
+    (if (pathnamep body)
+        `(,rc ,hdr ,body)
+        `(,rc ,hdr (,body)))))
+
+
