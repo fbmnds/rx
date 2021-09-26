@@ -93,4 +93,19 @@
         `(,rc ,hdr ,body)
         `(,rc ,hdr (,body)))))
 
+(defm div (&body body)
+  `(react-element :div ,@body))
+
+(defm strong (&body body)
+  `(react-element :strong ,@body))
+
+(defm span (&body body)
+  `(react-element :span ,@body))
+
+(defm label (&body body)
+  `(react-element :label ,@body))
+
+(defm input (&body body)
+  `(react-element :input ,@body))
+
 
