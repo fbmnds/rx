@@ -16,7 +16,8 @@
    (:module "src"
     :components
     ((:file "rx")
-     (:file "toggle-switch")))
+     (:file "toggle-switch")
+     (:file "range")))
    (:module "t"
     :components
     ((:file "rx-tests")))))

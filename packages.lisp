@@ -19,12 +19,18 @@
            #:react-dom-render
            #:react-bootstrap-tab*
            #:toggle-switch-fn
+           #:range-fn
            #:use-state
            #:get-prop
            #:with-prop
            #:route
            #:@
-           #:{}))
+           #:{}
+           #:div
+           #:input
+           #:label
+           #:span
+           #:strong))
 
 (defpackage #:rx/tests
   (:use #:cl)
