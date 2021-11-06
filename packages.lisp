@@ -9,6 +9,7 @@
            #:js
            #:tlambda
            #:js-func
+           #:fetch-text
            #:ps-map
            #:ps-reduce
            #:string+
@@ -27,6 +28,7 @@
            #:@
            #:{}
            #:div
+           #:button
            #:input
            #:label
            #:span

@@ -24,7 +24,7 @@
      (defun -range (props)
        (let* ((min@ (or (rx:@ props min) 0))
               (max@ (or (rx:@ props max) 100))
-              (initial@ (or (rx:@ props initial) (/ (- max@ - min@) 2)))
+              (initial@ (or (rx:@ props initial) (/ (- max@ min@) 2)))
               (initial-percentage
                 (get-percentage initial@ min@ max@))
               (range-ref ((ps:@ -react use-ref)))
