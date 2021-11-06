@@ -27,6 +27,12 @@
     `(defun ,name ()
        ,code)))
 
+(defm fetch-text (url)
+  "Fetch `url' and return the response body as text."
+  `(ps:chain (fetch ,url)
+	     (then (lambda (response) (ps:chain response (text))))
+	     (catch (lambda (error) (throw error)))))
+
 (defm react-element (&body body)
   `(ps:chain -react (create-element ,@body)))
 
@@ -108,4 +114,6 @@
 (defm input (&body body)
   `(react-element :input ,@body))
 
+(defm button (&body body)
+  `(react-element :button ,@body))
 
