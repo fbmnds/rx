@@ -41,7 +41,7 @@
                          (get-width p))
                    (setf (ps:@ current-ref current text-content)
                          (format-fn props v))
-                   nil)
+                   ps:undefined)
                  (ps:array (ps:@ props format-fn))))
               (handle-mouse-move
                 (lambda (e)
